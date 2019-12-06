@@ -6,6 +6,7 @@
 #include "PokemonGym.h"
 #include "PokemonCenter.h"
 #include "BattleArena.h"
+#include "Rival.h"
 #include <string>
 
 enum PokemonStates
@@ -68,7 +69,7 @@ protected:
     double physical_damage;
     double magical_damage;
     double defense;
-    //Rival *target;
+    Rival *target;
     PokemonCenter *current_center;
     PokemonGym *current_gym;
     BattleArena *current_arena;

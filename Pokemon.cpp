@@ -21,7 +21,7 @@ Pokemon::Pokemon() : GameObject('P')
     experience_points = 0;
     this->speed = 5.0;
     this->health = 20.0;
-    cout << "Pokemon constructed. " << endl;
+    cout << "Pokemon constructed." << endl;
 }
 
 Pokemon::Pokemon(string name, int id, char in_code, unsigned int speed, Point2D in_loc) : GameObject(in_loc, id, in_code)
