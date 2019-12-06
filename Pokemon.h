@@ -5,6 +5,7 @@
 #include "Vector2D.h"
 #include "PokemonGym.h"
 #include "PokemonCenter.h"
+#include "BattleArena.h"
 #include <string>
 
 enum PokemonStates
@@ -70,7 +71,7 @@ protected:
     //Rival *target;
     PokemonCenter *current_center;
     PokemonGym *current_gym;
-    //BattleArena *current_arena;
+    BattleArena *current_arena;
     string name;
 };
 double GetRandomAmountOfPokemonDollars();

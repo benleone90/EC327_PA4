@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
+#include <algorithm>
 
 // TODO: Pick sane default starting values
 Pokemon::Pokemon() : GameObject('P')
