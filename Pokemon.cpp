@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <algorithm>
 
-using namespace std;
-
 // TODO: Pick sane default starting values
 Pokemon::Pokemon() : GameObject('P')
 {
@@ -27,6 +25,7 @@ Pokemon::Pokemon() : GameObject('P')
     this->store_health = health;
     this->physical_damage = 5.0;
     this->magical_damage = 4.0;
+    this->defense = 15;
     cout << "Pokemon default constructed." << endl;
 }
 
@@ -48,7 +47,7 @@ Pokemon::Pokemon(string name, double speed, double hp, double phys_dmg, double m
     is_in_gym = false;
     is_in_center = false;
     experience_points = 0;
-    cout << "Pokemon constructed. " << endl;
+    cout << "Pokemon constructed." << endl;
 }
 
 Pokemon::Pokemon(char in_code) : GameObject(in_code)
@@ -69,15 +68,27 @@ Pokemon::Pokemon(char in_code) : GameObject(in_code)
     is_in_gym = false;
     is_in_center = false;
     experience_points = 0;
-    cout << "Pokemon constructed. " << endl;
+    cout << "Pokemon constructed." << endl;
 }
 
 Pokemon::~Pokemon()
 {
-    cout << "Pokemon destructed. " << endl;
+    cout << "Pokemon destructed." << endl;
 }
 
 // PA4 code goes here....
+bool Pokemon::IsAlive()
+{
+    if (state != FAINTED)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 bool Pokemon::IsExhausted()
 {
     return stamina == 0;

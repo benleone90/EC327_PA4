@@ -31,20 +31,23 @@ class Pokemon : public GameObject
 public:
     Pokemon();
     Pokemon(char in_code);
-    Pokemon(string name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc);
+    Pokemon(string name, double speed, double hp, double phys_dmg, double magic_dmg, int id, char in_code, Point2D in_loc);
     ~Pokemon();
     void StartMoving(Point2D dest);
     void StartMovingToCenter(PokemonCenter *center);
     void StartMovingToGym(PokemonGym *gym);
     void StartTraining(unsigned int num_training_units);
-    void StartRecoveringStamina(
-        unsigned int num_stamina_points);
+    void StartRecoveringStamina(unsigned int num_stamina_points);
+    void TakeHit(double physical_damage, double magical_damage, double defense);
+    void ReadyBattle(Rival *in_target);
     void Stop();
     void ShowStatus();
     bool Update();
     string GetName();
     bool IsExhausted();
     bool ShouldBeVisible();
+    bool IsAlive();
+    bool StartBattle();
 
 protected:
     bool UpdateLocation();
@@ -60,7 +63,7 @@ protected:
     unsigned int experience_points;
     bool is_in_gym;
     bool is_in_center;
-    bool is_in_areana;
+    bool is_in_arena;
     unsigned int stamina;
     unsigned int training_units_to_buy;
     unsigned int stamina_points_to_buy;
