@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <algorithm>
 
+using namespace std;
+
 // TODO: Pick sane default starting values
 Pokemon::Pokemon() : GameObject('P')
 {
@@ -11,6 +13,7 @@ Pokemon::Pokemon() : GameObject('P')
     pokemon_dollars = 0.0;
     current_center = NULL;
     current_gym = NULL;
+    current_arena = NULL;
     stamina_points_to_buy = 0;
     training_units_to_buy = 0;
     speed = 1;
@@ -21,20 +24,27 @@ Pokemon::Pokemon() : GameObject('P')
     experience_points = 0;
     this->speed = 5.0;
     this->health = 20.0;
-    cout << "Pokemon constructed." << endl;
+    this->store_health = health;
+    this->physical_damage = 5.0;
+    this->magical_damage = 4.0;
+    cout << "Pokemon default constructed." << endl;
 }
 
-Pokemon::Pokemon(string name, int id, char in_code, unsigned int speed, Point2D in_loc) : GameObject(in_loc, id, in_code)
+Pokemon::Pokemon(string name, double speed, double hp, double phys_dmg, double magic_dmg, int id, char in_code, Point2D in_loc) : GameObject(in_loc, id, in_code)
 {
     stamina = 20;
     pokemon_dollars = 0.0;
     current_center = NULL;
     current_gym = NULL;
+    current_arena = NULL;
     stamina_points_to_buy = 0;
     training_units_to_buy = 0;
     this->name = name;
     this->speed = speed;
-    this->health = health;
+    this->health = hp;
+    this->store_health = health;
+    this->physical_damage = phys_dmg;
+    this->magical_damage = magic_dmg;
     is_in_gym = false;
     is_in_center = false;
     experience_points = 0;
@@ -47,11 +57,15 @@ Pokemon::Pokemon(char in_code) : GameObject(in_code)
     pokemon_dollars = 0.0;
     current_center = NULL;
     current_gym = NULL;
+    current_arena = NULL;
     stamina_points_to_buy = 0;
     training_units_to_buy = 0;
     this->name = name;
     this->speed = speed;
     this->health = health;
+    this->store_health = health;
+    this->physical_damage = physical_damage;
+    this->magical_damage = magical_damage;
     is_in_gym = false;
     is_in_center = false;
     experience_points = 0;
