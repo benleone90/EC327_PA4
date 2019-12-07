@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
             getline(input_file, input);
         } else
             getline(cin, input);
-        if (input.length() > 0 and !IsWhiteSpace(input)) {
+        if (input.length() > 0 && !IsWhiteSpace(input)) {
             istringstream iss(input);
             vector<string> tokens;
             copy(istream_iterator<string>(iss),

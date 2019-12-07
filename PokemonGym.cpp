@@ -1,9 +1,11 @@
 #include <iostream>
+#include <algorithm>
 #include "Building.h"
 #include "PokemonGym.h"
 using namespace std;
 
-PokemonGym::PokemonGym(): Building('G', 0, Point2D(0.0, 0.0)) {
+PokemonGym::PokemonGym() : Building('G', 0, Point2D(0.0, 0.0))
+{
     state = NOT_BEATEN;
     max_number_of_training_units = 10;
     num_training_units_remaining = max_number_of_training_units;
@@ -13,10 +15,8 @@ PokemonGym::PokemonGym(): Building('G', 0, Point2D(0.0, 0.0)) {
     cout << "PokemonGym default constructed. " << endl;
 }
 
-PokemonGym::PokemonGym(unsigned int max_training_units,
-                       unsigned int stamina_cost, double dollar_cost,
-                       unsigned int exp_points_per_training, int in_id,
-                       Point2D point2d): Building('G', in_id, point2d) {
+PokemonGym::PokemonGym(unsigned int max_training_units, unsigned int stamina_cost, double dollar_cost, unsigned int exp_points_per_training, int in_id, Point2D point2d) : Building('G', in_id, point2d)
+{
     state = NOT_BEATEN;
     max_number_of_training_units = max_training_units;
     num_training_units_remaining = max_training_units;
@@ -26,8 +26,10 @@ PokemonGym::PokemonGym(unsigned int max_training_units,
     cout << "PokemonGym constructed. " << endl;
 }
 
-bool PokemonGym::Update() {
-    if (state == NOT_BEATEN && num_training_units_remaining == 0) {
+bool PokemonGym::Update()
+{
+    if (state == NOT_BEATEN && num_training_units_remaining == 0)
+    {
         state = BEATEN; // current_gym closes when you beat all trainers
         display_code = 'g';
         cout << display_code << GetId() << " has been beaten" << endl;
@@ -36,7 +38,8 @@ bool PokemonGym::Update() {
     return false;
 }
 
-void PokemonGym::ShowStatus() {
+void PokemonGym::ShowStatus()
+{
     cout << "Pokemon Gym Status: ";
     Building::ShowStatus();
     cout << "\tMax number of training units: " << max_number_of_training_units << endl;
@@ -46,19 +49,23 @@ void PokemonGym::ShowStatus() {
     cout << "\t" << num_training_units_remaining << " training unit(s) are remaining for this gym" << endl;
 }
 
-PokemonGym::~PokemonGym() {
+PokemonGym::~PokemonGym()
+{
     cout << "PokemonGym destructed. " << endl;
 }
 
-double PokemonGym::GetDollarCost(unsigned int training_units) {
+double PokemonGym::GetDollarCost(unsigned int training_units)
+{
     return training_units * dollar_cost_per_training_unit;
 }
 
-unsigned int PokemonGym::GetStaminaCost(unsigned int training_units) {
+unsigned int PokemonGym::GetStaminaCost(unsigned int training_units)
+{
     return training_units * stamina_cost_per_training_unit;
 }
 
-unsigned int PokemonGym::GetMaxAllowableTrainingUnits(double budget, unsigned int stamina) {
+unsigned int PokemonGym::GetMaxAllowableTrainingUnits(double budget, unsigned int stamina)
+{
     // TODO: check for division by zero
     unsigned int cost_by_stamina = stamina / stamina_cost_per_training_unit;
     unsigned int cost_by_budget = (int)(budget / dollar_cost_per_training_unit);
@@ -66,36 +73,38 @@ unsigned int PokemonGym::GetMaxAllowableTrainingUnits(double budget, unsigned in
     return allowable_units;
 }
 
-
-unsigned int PokemonGym::TrainPokemon(unsigned int training_units) {
+unsigned int PokemonGym::TrainPokemon(unsigned int training_units)
+{
     unsigned int exp_points = 0;
-    if (num_training_units_remaining >= training_units) {
+    if (num_training_units_remaining >= training_units)
+    {
         exp_points = training_units * experience_points_per_training_unit;
         num_training_units_remaining -= training_units;
-    } else {
+    }
+    else
+    {
         exp_points = num_training_units_remaining * experience_points_per_training_unit;
         num_training_units_remaining = 0;
     }
     return exp_points;
 }
 
-bool PokemonGym::HasEnoughTrainingUnits(unsigned int training_units) {
+bool PokemonGym::HasEnoughTrainingUnits(unsigned int training_units)
+{
     return num_training_units_remaining >= training_units;
 }
 
-bool PokemonGym::IsAbleToTrain(unsigned int training_units,
-        double budget, unsigned int stamina) {
+bool PokemonGym::IsAbleToTrain(unsigned int training_units, double budget, unsigned int stamina)
+{
     return GetMaxAllowableTrainingUnits(budget, stamina) >= training_units;
 }
 
-bool PokemonGym::IsBeaten() {
+bool PokemonGym::IsBeaten()
+{
     return num_training_units_remaining == 0;
 }
 
-unsigned int PokemonGym::GetNumTrainingUnitsRemaining() {
+unsigned int PokemonGym::GetNumTrainingUnitsRemaining()
+{
     return num_training_units_remaining;
 }
-
-
-
-

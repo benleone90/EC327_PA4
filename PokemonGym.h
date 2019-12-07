@@ -2,12 +2,14 @@
 #define POKEMON_GYM_H
 #include "Building.h"
 
-enum PokemonGymStates {
+enum PokemonGymStates
+{
     NOT_BEATEN = 0,
     BEATEN = 1
 };
 
-class PokemonGym: public Building {
+class PokemonGym : public Building
+{
 public:
     PokemonGym();
     ~PokemonGym();
@@ -26,13 +28,11 @@ public:
     // stamina: how much energy a pokemon has remaining
     // training_units_remaining: how many training units a pokemon has left to beat
     unsigned int GetMaxAllowableTrainingUnits(double budget, unsigned int stamina);
-    bool IsAbleToTrain(unsigned int training_units,
-                 double budget, unsigned int stamina);
+    bool IsAbleToTrain(unsigned int training_units, double budget, unsigned int stamina);
     // NOTE: this function is not required in the assignment
     bool HasEnoughTrainingUnits(unsigned int training_units);
     unsigned int GetNumTrainingUnitsRemaining();
     bool IsBeaten();
-
 
 private:
     unsigned int max_number_of_training_units;
