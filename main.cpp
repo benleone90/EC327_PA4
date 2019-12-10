@@ -106,7 +106,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Not an interger or double");
                     }
                     if (!error)
                     {

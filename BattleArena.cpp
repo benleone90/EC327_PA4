@@ -46,6 +46,11 @@ double BattleArena::GetDollarCost()
     return dollar_cost_per_fight;
 }
 
+unsigned int GetStaminaCost()
+{
+    return stamina_cost_per_fight;
+}
+
 bool BattleArena::IsAbleToFight(double budget, unsigned int stamina)
 {
     if ((budget >= dollar_cost_per_fight) && (stamina >= stamina_cost_per_fight))

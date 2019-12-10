@@ -76,10 +76,12 @@ bool Rival::Update()
     if (health <= 0)
     {
         state = FAINTED_RIVAL;
+        return false;
     }
     else
     {
         state = ALIVE_RIVAL;
+        return true;
     }
 }
 
