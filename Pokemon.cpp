@@ -60,12 +60,12 @@ Pokemon::Pokemon(char in_code) : GameObject(in_code)
     current_arena = NULL;
     stamina_points_to_buy = 0;
     training_units_to_buy = 0;
-    this->name = name;
-    this->speed = speed;
-    this->health = health;
+    this->name = "Pokemon";
+    this->speed = 5.0;
+    this->health = 20.0;
     this->store_health = health;
-    this->physical_damage = physical_damage;
-    this->magical_damage = magical_damage;
+    this->physical_damage = 5.0;
+    this->magical_damage = 4.0;
     is_in_gym = false;
     is_in_center = false;
     experience_points = 0;
@@ -279,7 +279,6 @@ bool Pokemon::Update()
             this->state = FAINTED;
             target->IsAlive();
         }
-        
 
     case EXHAUSTED:
     case IN_GYM:
