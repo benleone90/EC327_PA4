@@ -31,7 +31,7 @@ class Pokemon : public GameObject
 public:
     Pokemon();
     Pokemon(char in_code);
-    Pokemon(string name, double speed, double hp, double phys_dmg, double magic_dmg, int id, char in_code, Point2D in_loc);
+    Pokemon(string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int id, char in_code, Point2D in_loc);
     ~Pokemon();
     void StartMoving(Point2D dest);
     void StartMovingToCenter(PokemonCenter *center);

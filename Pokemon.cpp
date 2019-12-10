@@ -29,7 +29,7 @@ Pokemon::Pokemon() : GameObject('P')
     cout << "Pokemon default constructed." << endl;
 }
 
-Pokemon::Pokemon(string name, double speed, double hp, double phys_dmg, double magic_dmg, int id, char in_code, Point2D in_loc) : GameObject(in_loc, id, in_code)
+Pokemon::Pokemon(string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int in_id, char in_code, Point2D in_loc) : GameObject(in_loc, in_id, 'P')
 {
     stamina = 20;
     pokemon_dollars = 0.0;
@@ -44,6 +44,7 @@ Pokemon::Pokemon(string name, double speed, double hp, double phys_dmg, double m
     this->store_health = health;
     this->physical_damage = phys_dmg;
     this->magical_damage = magic_dmg;
+    this->defense = def;
     is_in_gym = false;
     is_in_center = false;
     experience_points = 0;
@@ -263,11 +264,23 @@ bool Pokemon::Update()
         return true;
     case BATTLE:
         ReadyBattle(target);
-        StartBattle();
         stamina_cost = current_arena->GetStaminaCost();
         dollar_cost = current_arena->GetDollarCost();
         stamina_cost -= stamina_cost;
         pokemon_dollars -= dollar_cost;
+        if (StartBattle())
+        {
+            this->health = 20;
+            this->state = IN_ARENA;
+            target->IsAlive();
+        }
+        else
+        {
+            this->state = FAINTED;
+            target->IsAlive();
+        }
+        
+
     case EXHAUSTED:
     case IN_GYM:
     case IN_CENTER:
@@ -455,12 +468,18 @@ void Pokemon::ReadyBattle(Rival *in_target)
 
 bool Pokemon::StartBattle()
 {
-    //time++ time should increment 1
-    // maybe need to use model
-    while (health <= 0.0 || target->get_health() <= 0.0)
+    while (health > 0.0 || target->get_health() > 0.0)
     {
         TakeHit(target->get_phys_dmg(), target->get_magic_dmg(), defense);
         target->TakeHit(physical_damage, magical_damage, target->get_defense());
+    }
+    if (health <= 0)
+    {
+        return false; // Lost to rival
+    }
+    else
+    {
+        return true; // Beat the rival
     }
 }
 

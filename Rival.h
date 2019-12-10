@@ -4,6 +4,12 @@
 #include "BattleArena.h"
 #include <string>
 
+enum RivalStates
+{
+    ALIVE_RIVAL = 0,
+    FAINTED_RIVAL = 1
+};
+
 class Rival : public GameObject
 {
 public:
@@ -17,8 +23,11 @@ public:
     bool Update();
     void ShowStatus();
     bool IsAlive();
+    bool ShouldBeVisible();
 
-private:
+protected:
+    string name;
+    double speed;
     double health;
     double physical_damage;
     double magical_damage;

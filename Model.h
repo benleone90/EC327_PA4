@@ -4,6 +4,7 @@
 #include "Pokemon.h"
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
+#include "Rival.h"
 #include "View.h"
 
 class Model {
@@ -19,6 +20,8 @@ public:
     int num_centers;
     PokemonGym * gym_ptrs[10];
     int num_gyms;
+    Rival *rival_ptrs[10];
+    int num_rivals;
     
 public:
     Model();

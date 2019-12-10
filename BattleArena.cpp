@@ -57,3 +57,37 @@ bool BattleArena::IsAbleToFight(double budget, unsigned int stamina)
         return false;
     }
 }
+
+bool BattleArena::Update()
+{
+    if (num_rivals_remaining == 0 && state == RIVALS_AVAILABLE)
+    {
+        state = NO_RIVALS_AVAILABLE;
+        display_code = 'r';
+        cout << "Battle Arena " << GetId() << " has ran out of rivals" << endl;
+        return true;
+    }
+    return false;
+}
+
+bool BattleArena::IsBeaten()
+{
+    if (num_rivals_remaining == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void BattleArena::ShowStatus()
+{
+    cout << "Battle Arena Status: ";
+    Building::ShowStatus();
+    cout << pokemon_count << " Pokemon are in this building" << endl;
+    cout << "\tStamina cost per fight: " << stamina_cost_per_fight << endl;
+    cout << "\tPokemon dollars per fight: " << dollar_cost_per_fight << endl;
+    cout << num_rivals_remaining << " rival(s) are remaining for this arena" << endl;
+}
