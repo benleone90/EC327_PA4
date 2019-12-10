@@ -92,142 +92,149 @@ int main(int argc, char **argv)
                 command = tokens[0][0];
             else
                 error = true;
-            switch (command)
+            try
             {
-            //moving a Pikachu to a location
-            case 'm':
-                if (tokens.size() == 4)
+                switch (command)
                 {
-                    id = atoi(tokens[1].c_str());
-                    x = atof(tokens[2].c_str());
-                    y = atof(tokens[3].c_str());
-                }
-                else
-                {
+                //moving a Pikachu to a location
+                case 'm':
+                    if (tokens.size() == 4)
+                    {
+                        id = atoi(tokens[1].c_str());
+                        x = atof(tokens[2].c_str());
+                        y = atof(tokens[3].c_str());
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    if (!error)
+                    {
+                        Point2D moveTo = Point2D(x, y);
+                        DoMoveCommand(game_model, id, moveTo);
+                        game_model.Display(game_view);
+                    }
+                    break;
+                case 'c':
+                    if (tokens.size() == 3)
+                    {
+                        id = atoi(tokens[1].c_str());
+                        id2 = atoi(tokens[2].c_str());
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    if (!error)
+                    {
+                        DoMoveToCenterCommand(game_model, id, id2);
+                        game_model.Display(game_view);
+                    }
+                    break;
+                case 'g':
+                    if (tokens.size() == 3)
+                    {
+                        id = atoi(tokens[1].c_str());
+                        id2 = atoi(tokens[2].c_str());
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    if (!error)
+                    {
+                        DoMoveToGymCommand(game_model, id, id2);
+                        game_model.Display(game_view);
+                    }
+                    break;
+                case 'r':
+                    if (tokens.size() == 3)
+                    {
+                        id = atoi(tokens[1].c_str());
+                        stamina_amount = atoi(tokens[2].c_str());
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    if (!error)
+                    {
+                        DoRecoverInCenterCommand(game_model, id, stamina_amount);
+                        game_model.Display(game_view);
+                    }
+                    break;
+                case 't':
+                    if (tokens.size() == 3)
+                    {
+                        id = atoi(tokens[1].c_str());
+                        training_unit_amount = atoi(tokens[2].c_str());
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    if (!error)
+                    {
+                        DoTrainInGymCommand(game_model, id, training_unit_amount);
+                        game_model.Display(game_view);
+                    }
+                    break;
+                case 's':
+                    if (tokens.size() == 2)
+                    {
+                        id = atoi(tokens[1].c_str());
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    if (!error)
+                    {
+                        DoStopCommand(game_model, id);
+                        game_model.Display(game_view);
+                    }
+                    break;
+                case 'v':
+                    if (tokens.size() == 1)
+                    {
+                        DoGoCommand(game_model, game_view);
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    break;
+                //advance 5 time ticks or until next event
+                case 'x':
+                    if (tokens.size() == 1)
+                    {
+                        DoRunCommand(game_model, game_view);
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    break;
+                //quit the program
+                case 'q':
+                    if (tokens.size() == 1)
+                    {
+                        cout << "Terminating program." << endl;
+                        game_is_running = false;
+                    }
+                    else
+                    {
+                        error = true;
+                    }
+                    break;
+                default:
                     error = true;
+                    break;
                 }
-                if (!error)
-                {
-                    Point2D moveTo = Point2D(x, y);
-                    DoMoveCommand(game_model, id, moveTo);
-                    game_model.Display(game_view);
-                }
-                break;
-            case 'c':
-                if (tokens.size() == 3)
-                {
-                    id = atoi(tokens[1].c_str());
-                    id2 = atoi(tokens[2].c_str());
-                }
-                else
-                {
-                    error = true;
-                }
-                if (!error)
-                {
-                    DoMoveToCenterCommand(game_model, id, id2);
-                    game_model.Display(game_view);
-                }
-                break;
-            case 'g':
-                if (tokens.size() == 3)
-                {
-                    id = atoi(tokens[1].c_str());
-                    id2 = atoi(tokens[2].c_str());
-                }
-                else
-                {
-                    error = true;
-                }
-                if (!error)
-                {
-                    DoMoveToGymCommand(game_model, id, id2);
-                    game_model.Display(game_view);
-                }
-                break;
-            case 'r':
-                if (tokens.size() == 3)
-                {
-                    id = atoi(tokens[1].c_str());
-                    stamina_amount = atoi(tokens[2].c_str());
-                }
-                else
-                {
-                    error = true;
-                }
-                if (!error)
-                {
-                    DoRecoverInCenterCommand(game_model, id, stamina_amount);
-                    game_model.Display(game_view);
-                }
-                break;
-            case 't':
-                if (tokens.size() == 3)
-                {
-                    id = atoi(tokens[1].c_str());
-                    training_unit_amount = atoi(tokens[2].c_str());
-                }
-                else
-                {
-                    error = true;
-                }
-                if (!error)
-                {
-                    DoTrainInGymCommand(game_model, id, training_unit_amount);
-                    game_model.Display(game_view);
-                }
-                break;
-            case 's':
-                if (tokens.size() == 2)
-                {
-                    id = atoi(tokens[1].c_str());
-                }
-                else
-                {
-                    error = true;
-                }
-                if (!error)
-                {
-                    DoStopCommand(game_model, id);
-                    game_model.Display(game_view);
-                }
-                break;
-            case 'v':
-                if (tokens.size() == 1)
-                {
-                    DoGoCommand(game_model, game_view);
-                }
-                else
-                {
-                    error = true;
-                }
-                break;
-            //advance 5 time ticks or until next event
-            case 'x':
-                if (tokens.size() == 1)
-                {
-                    DoRunCommand(game_model, game_view);
-                }
-                else
-                {
-                    error = true;
-                }
-                break;
-            //quit the program
-            case 'q':
-                if (tokens.size() == 1)
-                {
-                    cout << "Terminating program." << endl;
-                    game_is_running = false;
-                }
-                else
-                {
-                    error = true;
-                }
-                break;
-            default:
-                error = true;
-                break;
+            }
+            catch (Invalid_Input &except)
+            {
+                cout << "Invalid input - " << except.msg_ptr << endl;
             }
         }
         else
