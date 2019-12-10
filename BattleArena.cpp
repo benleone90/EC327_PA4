@@ -46,7 +46,7 @@ double BattleArena::GetDollarCost()
     return dollar_cost_per_fight;
 }
 
-unsigned int GetStaminaCost()
+unsigned int BattleArena::GetStaminaCost()
 {
     return stamina_cost_per_fight;
 }
