@@ -7,32 +7,29 @@
 #include "Rival.h"
 #include "View.h"
 
-class Model {
-    
+class Model
+{
+
 public:
     //simulation time
     int time;
-    GameObject * object_ptrs[10];
-    int num_objects;
-    Pokemon * pokemon_ptrs[10];
-    int num_pokemon;
-    PokemonCenter * center_ptrs[10];
-    int num_centers;
-    PokemonGym * gym_ptrs[10];
-    int num_gyms;
-    Rival *rival_ptrs[10];
-    int num_rivals;
-    
+    //PA4 Linked Lists
+    list<GameObject *> object_ptrs;
+    list<GameObject *> active_ptrs;
+    list<Pokemon *> pokemon_ptrs;
+    list<Rival *> rival_ptrs;
+    list<PokemonGym *> gym_ptrs;
+    list<PokemonCenter *> center_ptrs;
+
 public:
     Model();
     ~Model();
-    Pokemon* GetPokemonPtr(int id);
-    PokemonCenter* GetPokemonCenterPtr(int id);
-    PokemonGym* GetPokemonGymPtr(int id);
+    Pokemon *GetPokemonPtr(int id);
+    PokemonCenter *GetPokemonCenterPtr(int id);
+    PokemonGym *GetPokemonGymPtr(int id);
     bool Update();
     void Display(View &view);
     void ShowStatus();
 };
-
 
 #endif

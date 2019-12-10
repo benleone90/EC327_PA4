@@ -8,40 +8,34 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <list>
 
 Model::Model()
 {
     time = 0;
-    //Pikachu 1
-    pokemon_ptrs[0] = new Pokemon("Pikachu", 2.0, 20, 5, 4, 15, 1, 'P', Point2D(5, 1));
-    object_ptrs[0] = pokemon_ptrs[0];
-    //Pikachu 2
-    pokemon_ptrs[1] = new Pokemon("Bulbasaur", 1.0, 20, 5, 4, 15, 2, 'P', Point2D(10, 1));
-    object_ptrs[1] = pokemon_ptrs[1];
+    //Pokemon 1
+    Pokemon *p1 = new Pokemon("Pikachu", 2.0, 20, 5, 4, 15, 1, 'P', Point2D(5, 1));
+    pokemon_ptrs.push_back(p1);
+    object_ptrs.push_back(p1);
+    active_ptrs.push_back(p1);
+    //Pokemon 2
+    Pokemon *p2 = new Pokemon("Bulbasaur", 1.0, 20, 5, 4, 15, 2, 'P', Point2D(10, 1));
+    pokemon_ptrs.push_back(p2);
+    object_ptrs.push_back(p2);
+    active_ptrs.push_back(p2);
     //PokemonCenter 1
-    center_ptrs[0] = new PokemonCenter(1, 1, 100, Point2D(1, 20));
-    object_ptrs[2] = center_ptrs[0];
+    PokemonCenter *c1 = new PokemonCenter(1, 1, 100, Point2D(1, 20));
+    center_ptrs.push_back(c1);
+    object_ptrs.push_back(c1);
     //PokemonCenter 2
-    center_ptrs[1] = new PokemonCenter(2, 2, 200, Point2D(10, 20));
-    object_ptrs[3] = center_ptrs[1];
-    //PokemonGym 1
-    gym_ptrs[0] = new PokemonGym(10, 1.0, 2.0, 3, 1, Point2D(0, 0));
-    object_ptrs[4] = gym_ptrs[0];
-    //PokemonGym 2
-    gym_ptrs[1] = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
-    object_ptrs[5] = gym_ptrs[1];
+    PokemonCenter *c2 = new PokemonCenter(2, 2, 200, Point2D(10, 20));
+    center_ptrs.push_back(c2);
+    object_ptrs.push_back(c2);
+    //PokemonGym1
+    //PokemonGym2
     //Rival1
-    rival_ptrs[0] = new Rival("Charizard", 8, 20, 5, 4, 15, 1, Point2D(15, 12));
-    object_ptrs[6] = rival_ptrs[0];
     //Rival2
-    rival_ptrs[1] = new Rival("Mewtwo", 10, 40, 10, 12, 15, 2, Point2D(15, 12));
-    object_ptrs[7] = rival_ptrs[1];
 
-    num_objects = 6;
-    num_pokemon = 2;
-    num_centers = 2;
-    num_gyms = 2;
-    num_rivals = 2;
 
     cout << "Model default constructed. " << endl;
 }
