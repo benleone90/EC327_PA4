@@ -123,7 +123,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Not an integer input");
                     }
                     if (!error)
                     {
@@ -139,7 +139,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Not an integer input");
                     }
                     if (!error)
                     {
@@ -155,7 +155,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Not an integer input");
                     }
                     if (!error)
                     {
@@ -171,7 +171,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Not an integer input");
                     }
                     if (!error)
                     {
@@ -186,7 +186,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Not an integer input or too many inputs");
                     }
                     if (!error)
                     {
@@ -201,7 +201,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Not an integer input or too many inputs");
                     }
                     break;
                 //advance 5 time ticks or until next event
@@ -212,7 +212,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        error = true;
+                        throw Invalid_Input("Too many inputs or not a GameModel or GameView input");
                     }
                     break;
                 //quit the program
