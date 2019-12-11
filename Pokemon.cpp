@@ -232,7 +232,7 @@ bool Pokemon::Update()
             {
                 state = IN_ARENA;
                 is_in_arena = true;
-                current_gym->AddOnePokemon();
+                current_arena->AddOnePokemon();
                 return true;
             }
             else
@@ -347,6 +347,34 @@ void Pokemon::StartMovingToGym(PokemonGym *gym)
     }
     else
         cout << display_code << GetId() << ": I am exhausted so I shouldn't be going to the gym.." << endl;
+}
+
+void Pokemon::StartMovingToArena(BattleArena *arena)
+{
+    if (!IsExhausted())
+    {
+        if (location == arena->GetLocation())
+        {
+            cout << display_code << GetId() << ": I am already at the Battle Arena!" << endl;
+        }
+        else
+        {
+            if (is_in_gym)
+            {
+                current_gym->RemoveOnePokemon();
+                is_in_gym = false;
+            }
+            else if (is_in_center)
+            {
+                current_center->RemoveOnePokemon();
+                is_in_center = false;
+            }
+            state = MOVING_TO_ARENA;
+            current_arena = arena;
+            SetupDestination(arena->GetLocation());
+            cout << display_code << GetId() << ": On my way to arena " << arena->GetId() << endl;
+        }
+    }
 }
 
 void Pokemon::StartTraining(unsigned int num_training_units)

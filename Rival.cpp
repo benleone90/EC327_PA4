@@ -107,6 +107,10 @@ void Rival::ShowStatus()
     default:
         break;
     }
+    cout << "\tHealth: " << health << endl;
+    cout << "\tPhysical Damage: " << physical_damage << endl;
+    cout << "\tMagical Damage: " << magical_damage << endl;
+    cout << "\tDefense: " << defense << endl;
 }
 
 bool Rival::ShouldBeVisible()

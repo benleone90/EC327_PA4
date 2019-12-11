@@ -54,7 +54,10 @@ Model::Model()
     rival_ptrs.push_back(r3);
     object_ptrs.push_back(r3);
     active_ptrs.push_back(r3);
-
+    //BattleArena 1
+    BattleArena *a1 = new BattleArena(3, 3, 2.5, 1, Point2D(15, 12));
+    arena_ptrs.push_back(a1);
+    object_ptrs.push_back(a1);
     cout << "Model default constructed. " << endl;
 }
 
@@ -69,26 +72,61 @@ Model::~Model()
 
 Pokemon *Model::GetPokemonPtr(int id)
 {
+    for (auto iter = pokemon_ptrs.begin(); iter != pokemon_ptrs.end(); iter++)
+    {
+        if ((*iter)->GetId() == id)
+        {
+            return (*iter);
+        }
+    }
     return 0;
 }
 
 PokemonCenter *Model::GetPokemonCenterPtr(int id)
 {
+    for (auto iter = center_ptrs.begin(); iter != center_ptrs.end(); iter++)
+    {
+        if ((*iter)->GetId() == id)
+        {
+            return (*iter);
+        }
+    }
     return 0;
 }
 
 PokemonGym *Model::GetPokemonGymPtr(int id)
 {
+    for (auto iter = gym_ptrs.begin(); iter != gym_ptrs.end(); iter++)
+    {
+        if ((*iter)->GetId() == id)
+        {
+            return (*iter);
+        }
+    }
     return 0;
 }
 
 Rival *Model::GetRivalPtr(int id)
 {
+    for (auto iter = rival_ptrs.begin(); iter != rival_ptrs.end(); iter++)
+    {
+        if ((*iter)->GetId() == id)
+        {
+            return (*iter);
+        }
+    }
     return 0;
 }
 
 BattleArena *Model::GetBattleArenaPtr(int id)
 {
+    for (auto iter = arena_ptrs.begin(); iter != arena_ptrs.end(); iter++)
+    {
+        if ((*iter)->GetId() == id)
+        {
+            return (*iter);
+        }
+    }
     return 0;
 }
 

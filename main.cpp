@@ -44,23 +44,10 @@ int main(int argc, char **argv)
 
     bool game_is_running = true;
 
-    bool read_from_file = false;
     game_model.ShowStatus();
     game_model.Display(game_view);
-    ifstream input_file;
-    if (argc == 2)
-    {
-        input_file.open(argv[1], ios_base::in);
-        if (!input_file.is_open())
-        {
-            cout << "Failed to open input file " << argv[1] << endl;
-            exit(EXIT_FAILURE);
-        }
-        read_from_file = true;
-        srand(0);
-    }
-    else
-        srand(time(NULL));
+
+    srand(time(NULL));
 
     while (game_is_running)
     {
@@ -76,25 +63,23 @@ int main(int argc, char **argv)
         double y = 0;
         unsigned int stamina_amount = 0;
         unsigned int training_unit_amount = 0;
-        if (read_from_file)
+        try
         {
-            getline(input_file, input);
-        }
-        else
             getline(cin, input);
-        if (input.length() > 0 && !IsWhiteSpace(input))
-        {
-            istringstream iss(input);
-            vector<string> tokens;
-            copy(istream_iterator<string>(iss),
-                 istream_iterator<string>(),
-                 back_inserter<vector<string>>(tokens));
-            if (tokens[0].length() == 1)
-                command = tokens[0][0];
-            else
-                error = true;
-            try
+
+            if (input.length() > 0 && !IsWhiteSpace(input))
             {
+
+                istringstream iss(input);
+                vector<string> tokens;
+                copy(istream_iterator<string>(iss),
+                     istream_iterator<string>(),
+                     back_inserter<vector<string>>(tokens));
+                if (tokens[0].length() == 1)
+                    command = tokens[0][0];
+                else
+                    error = true;
+
                 switch (command)
                 {
                 //moving a Pikachu to a location
@@ -145,6 +130,22 @@ int main(int argc, char **argv)
                     if (!error)
                     {
                         DoMoveToGymCommand(game_model, id, id2);
+                        game_model.Display(game_view);
+                    }
+                    break;
+                case 'a':
+                    if (tokens.size() == 3)
+                    {
+                        id = atoi(tokens[1].c_str());
+                        id2 = atoi(tokens[2].c_str());
+                    }
+                    else
+                    {
+                        throw Invalid_Input("Not an integer input");
+                    }
+                    if (!error)
+                    {
+                        DoMoveToArenaCommand(game_model, id, id2);
                         game_model.Display(game_view);
                     }
                     break;
@@ -220,7 +221,7 @@ int main(int argc, char **argv)
                 case 'n':
                     if (tokens.size() == 5)
                     {
-                        type = atoi(tokens[1].c_str());
+                        type = *tokens[1].c_str();
                         id = atoi(tokens[2].c_str());
                         x = atof(tokens[3].c_str());
                         y = atof(tokens[4].c_str());
@@ -253,15 +254,15 @@ int main(int argc, char **argv)
                     break;
                 }
             }
-            catch (Invalid_Input &except)
-            {
-                cout << "Invalid input - " << except.msg_ptr << endl;
-            }
+            else
+                error = true;
+            if (error)
+                throw Invalid_Input("Please enter a valid command!");
         }
-        else
-            error = true;
-        if (error)
-            cout << "ERROR: Please enter a valid command!" << endl;
+        catch (Invalid_Input &except)
+        {
+            cout << "Invalid input - " << except.msg_ptr << endl;
+        }
     }
     return 0;
 }

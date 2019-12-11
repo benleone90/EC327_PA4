@@ -36,6 +36,16 @@ void DoMoveToGymCommand(Model &model, int pokemon_id, int gym_id)
     else
         cout << "ERROR: Please enter a valid command!" << endl;
 }
+void DoMoveToArenaCommand(Model &model, int pokemon_id, int arena_id)
+{
+    if (model.GetPokemonPtr(pokemon_id) != 0)
+    {
+        cout << "Moving " << model.GetPokemonPtr(pokemon_id)->GetName() << " to Battle Arena " << arena_id << endl;
+        model.GetPokemonPtr(pokemon_id)->StartMovingToArena(model.GetBattleArenaPtr(arena_id));
+    }
+    else
+        cout << "ERROR: Please enter a valid command!" << endl;
+}
 
 void DoStopCommand(Model &model, int pokemon_id)
 {
@@ -102,7 +112,7 @@ void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc)
     }
     else if (type == 'p')
     {
-        Pokemon *p = new Pokemon("New Pokemon" + in_id, 2.0, 20, 5, 4, 15, 1, 'P', in_loc);
+        Pokemon *p = new Pokemon("Pokemon", 2.0, 20, 5, 4, 15, 1, 'P', in_loc);
         if (model.GetPokemonPtr(in_id) == p)
         {
             cout << "A Pokemon with this ID alreay exists" << endl;
@@ -117,7 +127,7 @@ void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc)
     }
     else if (type == 'r')
     {
-        Rival *r = new Rival("New Rival" + in_id, 10, 40, 10, 12, 15, 2, in_loc);
+        Rival *r = new Rival("Rival", 10, 40, 10, 12, 15, 2, in_loc);
         if (model.GetRivalPtr(in_id) == r)
         {
             cout << "A Rival with this ID already exists" << endl;
@@ -132,7 +142,7 @@ void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc)
     }
     else
     {
-        cout << "Type " << type << " does not exists" << endl;
+        cout << "Type" << type << " does not exists" << endl;
     }
 }
 
