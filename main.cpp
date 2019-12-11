@@ -71,6 +71,7 @@ int main(int argc, char **argv)
         int id2 = 0;
         bool error = false;
         string input = "'";
+        char type = ' ';
         double x = 0;
         double y = 0;
         unsigned int stamina_amount = 0;
@@ -213,6 +214,26 @@ int main(int argc, char **argv)
                     else
                     {
                         throw Invalid_Input("Too many inputs or not a GameModel or GameView input");
+                    }
+                    break;
+                //create new objects in the game
+                case 'n':
+                    if (tokens.size() == 5)
+                    {
+                        type = atoi(tokens[1].c_str());
+                        id = atoi(tokens[2].c_str());
+                        x = atof(tokens[3].c_str());
+                        y = atof(tokens[4].c_str());
+                    }
+                    else
+                    {
+                        throw Invalid_Input("Inputs are incorrect");
+                    }
+                    if (!error)
+                    {
+                        Point2D location = Point2D(x, y);
+                        DoCreateNewObjects(game_model, type, id, location);
+                        game_model.Display(game_view);
                     }
                     break;
                 //quit the program

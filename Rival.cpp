@@ -22,6 +22,11 @@ Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic
     this->magical_damage = magic_dmg;
 }
 
+Rival::~Rival()
+{
+    cout << "Rival destructed" << endl;
+}
+
 void Rival::TakeHit(double physical_damage, double magical_damage, double defense)
 {
     int attack_type = rand() % 2;

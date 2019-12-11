@@ -13,4 +13,5 @@ void DoGoCommand(Model &model, View &view);
 void DoRunCommand(Model &model, View &view);
 void DoTrainInGymCommand(Model &model, int pokemon_id, unsigned int training_units);
 void DoRecoverInCenterCommand(Model &model, int pokemon_id, unsigned int stamina_points);
+void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc);
 #endif

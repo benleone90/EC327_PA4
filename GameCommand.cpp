@@ -70,6 +70,72 @@ void DoRecoverInCenterCommand(Model &model, int pokemon_id, unsigned int stamina
         cout << "ERROR: Please enter a valid command!" << endl;
 }
 
+void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc)
+{
+    if (type == 'g')
+    {
+        PokemonGym *g = new PokemonGym(15, 3, 5, 4, in_id, in_loc);
+        if (model.GetPokemonGymPtr(in_id) == g)
+        {
+            cout << "A Pokemon Gym with this ID already exists" << endl;
+            g->~PokemonGym();
+        }
+        else
+        {
+            model.object_ptrs.push_back(g);
+            model.gym_ptrs.push_back(g);
+        }
+    }
+    else if (type == 'c')
+    {
+        PokemonCenter *c = new PokemonCenter(in_id, 3, 3, in_loc);
+        if (model.GetPokemonCenterPtr(in_id) == c)
+        {
+            cout << "A Pokemon Center with this ID already exits" << endl;
+            c->~PokemonCenter();
+        }
+        else
+        {
+            model.object_ptrs.push_back(c);
+            model.center_ptrs.push_back(c);
+        }
+    }
+    else if (type == 'p')
+    {
+        Pokemon *p = new Pokemon("New Pokemon" + in_id, 2.0, 20, 5, 4, 15, 1, 'P', in_loc);
+        if (model.GetPokemonPtr(in_id) == p)
+        {
+            cout << "A Pokemon with this ID alreay exists" << endl;
+            p->~Pokemon();
+        }
+        else
+        {
+            model.object_ptrs.push_back(p);
+            model.pokemon_ptrs.push_back(p);
+            model.active_ptrs.push_back(p);
+        }
+    }
+    else if (type == 'r')
+    {
+        Rival *r = new Rival("New Rival" + in_id, 10, 40, 10, 12, 15, 2, in_loc);
+        if (model.GetRivalPtr(in_id) == r)
+        {
+            cout << "A Rival with this ID already exists" << endl;
+            r->~Rival();
+        }
+        else
+        {
+            model.object_ptrs.push_back(r);
+            model.rival_ptrs.push_back(r);
+            model.active_ptrs.push_back(r);
+        }
+    }
+    else
+    {
+        cout << "Type " << type << " does not exists" << endl;
+    }
+}
+
 void DoGoCommand(Model &model, View &view)
 {
     cout << "Advancing one tick." << endl;
