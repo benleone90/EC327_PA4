@@ -263,7 +263,6 @@ bool Pokemon::Update()
         state = IN_GYM;
         return true;
     case BATTLE:
-        ReadyBattle(target);
         stamina_cost = current_arena->GetStaminaCost();
         dollar_cost = current_arena->GetDollarCost();
         stamina_cost -= stamina_cost;

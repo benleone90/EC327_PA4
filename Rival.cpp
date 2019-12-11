@@ -9,8 +9,9 @@ Rival::Rival() : GameObject('R')
     this->magical_damage = 4;
 }
 
-Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int in_id, Point2D in_loc) : GameObject(in_loc, in_id, 'R')
+Rival::Rival(string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int in_id, BattleArena *arena, Point2D in_loc) : GameObject(in_loc, in_id, 'R')
 {
+    current_arena = arena;
     this->health = hp;
     this->defense = def;
     this->physical_damage = phys_dmg;
@@ -34,11 +35,19 @@ void Rival::TakeHit(double physical_damage, double magical_damage, double defens
     {
         double damage = (100.0 - defense) / (100 * physical_damage);
         health = health - damage;
+        cout << "Physical Attack!" << endl;
+        cout << "Damage: " << damage << endl;
+        cout << "Health: " << health << endl;
+        cout << "*********" << endl;
     }
     else if (attack_type == 1) // 1 is magical damage
     {
         double damage = (100.0 - defense) / (100 * magical_damage);
         health = health - damage;
+        cout << "Magical Attack!" << endl;
+        cout << "Damage: " << damage << endl;
+        cout << "Health: " << health << endl;
+        cout << "*********" << endl;
     }
 }
 
@@ -81,6 +90,7 @@ bool Rival::Update()
     if (health <= 0)
     {
         state = FAINTED_RIVAL;
+        current_arena->RemoveOneRival();
         return false;
     }
     else

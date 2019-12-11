@@ -50,6 +50,10 @@ unsigned int BattleArena::GetStaminaCost()
 {
     return stamina_cost_per_fight;
 }
+void BattleArena::RemoveOneRival()
+{
+    num_rivals_remaining--;
+}
 
 bool BattleArena::IsAbleToFight(double budget, unsigned int stamina)
 {
@@ -93,5 +97,5 @@ void BattleArena::ShowStatus()
     Building::ShowStatus();
     cout << "\tStamina cost per fight: " << stamina_cost_per_fight << endl;
     cout << "\tPokemon dollars per fight: " << dollar_cost_per_fight << endl;
-    cout << num_rivals_remaining << " rival(s) are remaining for this arena" << endl;
+    cout << "\t" << num_rivals_remaining << " rival(s) are remaining for this arena" << endl;
 }

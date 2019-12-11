@@ -217,6 +217,23 @@ int main(int argc, char **argv)
                         throw Invalid_Input("Too many inputs or not a GameModel or GameView input");
                     }
                     break;
+                //battle command
+                case 'b':
+                    if (tokens.size() == 3)
+                    {
+                        id = atoi(tokens[1].c_str());
+                        id2 = atoi(tokens[2].c_str());
+                    }
+                    else
+                    {
+                        throw Invalid_Input("Inputs are incorrect");
+                    }
+                    if (!error)
+                    {
+                        DoBattleCommand(game_model, id, id2);
+                        game_model.Display(game_view);
+                    }
+                    break;
                 //create new objects in the game
                 case 'n':
                     if (tokens.size() == 5)

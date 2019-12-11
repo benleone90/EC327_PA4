@@ -21,6 +21,7 @@ public:
     bool Update();
     bool IsBeaten();
     void ShowStatus();
+    void RemoveOneRival();
 
 private:
     unsigned int max_num_rivals;

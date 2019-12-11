@@ -39,26 +39,26 @@ Model::Model()
     PokemonGym *g2 = new PokemonGym(20, 5, 7.5, 8, 2, Point2D(5, 5));
     gym_ptrs.push_back(g2);
     object_ptrs.push_back(g2);
-    //Rival 1
-    Rival *r1 = new Rival("Charizard", 8, 20, 5, 4, 15, 1, Point2D(15, 12));
-    rival_ptrs.push_back(r1);
-    object_ptrs.push_back(r1);
-    active_ptrs.push_back(r1);
-    //Rival 2
-    Rival *r2 = new Rival("Mewtwo", 10, 40, 10, 12, 15, 2, Point2D(15, 12));
-    rival_ptrs.push_back(r2);
-    object_ptrs.push_back(r2);
-    active_ptrs.push_back(r2);
-    //Rival 3
-    Rival *r3 = new Rival("Articuno", 12, 41, 20, 15, 13, 3, Point2D(15, 12));
-    rival_ptrs.push_back(r3);
-    object_ptrs.push_back(r3);
-    active_ptrs.push_back(r3);
-    //BattleArena 1
+    //BattleArena
     BattleArena *a1 = new BattleArena(3, 3, 2.5, 1, Point2D(15, 12));
     arena_ptrs.push_back(a1);
     object_ptrs.push_back(a1);
     cout << "Model default constructed. " << endl;
+    //Rival 1
+    Rival *r1 = new Rival("Charizard", 8, 20, 5, 4, 15, 1, a1, Point2D(15, 12));
+    rival_ptrs.push_back(r1);
+    object_ptrs.push_back(r1);
+    active_ptrs.push_back(r1);
+    //Rival 2
+    Rival *r2 = new Rival("Mewtwo", 10, 40, 10, 12, 15, 2, a1, Point2D(15, 12));
+    rival_ptrs.push_back(r2);
+    object_ptrs.push_back(r2);
+    active_ptrs.push_back(r2);
+    //Rival 3
+    Rival *r3 = new Rival("Articuno", 12, 41, 20, 15, 13, 3, a1, Point2D(15, 12));
+    rival_ptrs.push_back(r3);
+    object_ptrs.push_back(r3);
+    active_ptrs.push_back(r3);
 }
 
 Model::~Model()

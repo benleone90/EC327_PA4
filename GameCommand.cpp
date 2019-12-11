@@ -80,6 +80,17 @@ void DoRecoverInCenterCommand(Model &model, int pokemon_id, unsigned int stamina
         cout << "ERROR: Please enter a valid command!" << endl;
 }
 
+void DoBattleCommand(Model &model, int pokemon_id, int rival_id)
+{
+    if (model.GetPokemonPtr(pokemon_id) != 0 && model.GetRivalPtr(rival_id) != 0 && model.GetPokemonPtr(pokemon_id)->GetState() == IN_ARENA)
+    {
+        cout << model.GetPokemonPtr(pokemon_id)->GetId() << "Getting ready for the battle" << endl;
+        model.GetPokemonPtr(pokemon_id)->ReadyBattle(model.GetRivalPtr(rival_id));
+    }
+    else
+        cout << "ERROR: Please enter a valid command!" << endl;
+}
+
 void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc)
 {
     if (type == 'g')
@@ -127,7 +138,8 @@ void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc)
     }
     else if (type == 'r')
     {
-        Rival *r = new Rival("Rival", 10, 40, 10, 12, 15, 2, in_loc);
+        BattleArena *a1 = model.GetBattleArenaPtr(1);
+        Rival *r = new Rival("Rival", 10, 40, 10, 12, 15, 2, a1, in_loc);
         if (model.GetRivalPtr(in_id) == r)
         {
             cout << "A Rival with this ID already exists" << endl;
@@ -138,6 +150,7 @@ void DoCreateNewObjects(Model &model, char type, int in_id, Point2D in_loc)
             model.object_ptrs.push_back(r);
             model.rival_ptrs.push_back(r);
             model.active_ptrs.push_back(r);
+            //Still needs to add one rival to Battle Arena
         }
     }
     else
